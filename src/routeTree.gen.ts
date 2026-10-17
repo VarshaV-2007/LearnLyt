@@ -10,33 +10,143 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedGapRouteImport } from './routes/_authenticated/gap'
+import { Route as AuthenticatedResourcesRouteImport } from './routes/_authenticated/resources'
+import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
+import { Route as AuthenticatedSkillsRouteImport } from './routes/_authenticated/skills'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGapRoute = AuthenticatedGapRouteImport.update({
+  id: '/gap',
+  path: '/gap',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedResourcesRoute = AuthenticatedResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRoadmapRoute = AuthenticatedRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSkillsRoute = AuthenticatedSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/assistant': typeof AuthenticatedAssistantRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/gap': typeof AuthenticatedGapRoute
+  '/resources': typeof AuthenticatedResourcesRoute
+  '/roadmap': typeof AuthenticatedRoadmapRoute
+  '/skills': typeof AuthenticatedSkillsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/assistant': typeof AuthenticatedAssistantRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/gap': typeof AuthenticatedGapRoute
+  '/resources': typeof AuthenticatedResourcesRoute
+  '/roadmap': typeof AuthenticatedRoadmapRoute
+  '/skills': typeof AuthenticatedSkillsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/gap': typeof AuthenticatedGapRoute
+  '/_authenticated/resources': typeof AuthenticatedResourcesRoute
+  '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
+  '/_authenticated/skills': typeof AuthenticatedSkillsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/assistant'
+    | '/dashboard'
+    | '/gap'
+    | '/resources'
+    | '/roadmap'
+    | '/skills'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/assistant'
+    | '/dashboard'
+    | '/gap'
+    | '/resources'
+    | '/roadmap'
+    | '/skills'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/assistant'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/gap'
+    | '/_authenticated/resources'
+    | '/_authenticated/roadmap'
+    | '/_authenticated/skills'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +158,98 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/assistant': {
+      id: '/_authenticated/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AuthenticatedAssistantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/gap': {
+      id: '/_authenticated/gap'
+      path: '/gap'
+      fullPath: '/gap'
+      preLoaderRoute: typeof AuthenticatedGapRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resources': {
+      id: '/_authenticated/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof AuthenticatedResourcesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/roadmap': {
+      id: '/_authenticated/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof AuthenticatedRoadmapRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/skills': {
+      id: '/_authenticated/skills'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof AuthenticatedSkillsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedGapRoute: typeof AuthenticatedGapRoute
+  AuthenticatedResourcesRoute: typeof AuthenticatedResourcesRoute
+  AuthenticatedRoadmapRoute: typeof AuthenticatedRoadmapRoute
+  AuthenticatedSkillsRoute: typeof AuthenticatedSkillsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedGapRoute: AuthenticatedGapRoute,
+  AuthenticatedResourcesRoute: AuthenticatedResourcesRoute,
+  AuthenticatedRoadmapRoute: AuthenticatedRoadmapRoute,
+  AuthenticatedSkillsRoute: AuthenticatedSkillsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
